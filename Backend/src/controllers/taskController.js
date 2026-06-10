@@ -7,11 +7,11 @@ exports.createTask = async (req, res) => {
     createdBy: req.user._id,
   });
 
-  await logActivity(
-    req.user._id,
-    "TASK_CREATED",
-    `Task created: ${task.title}`
-  );
+  await logActivity({
+    userId: req.user._id,
+    action: `TASK_CREATED ${task.title}`,
+    req,
+  });
 
   res.status(201).json(task);
 };
@@ -64,11 +64,11 @@ exports.updateTask = async (req, res) => {
 
   await task.save();
 
-  await logActivity(
-    req.user._id,
-    "TASK_UPDATED",
-    `Task updated: ${task.title}`
-  );
+  await logActivity({
+    userId: req.user._id,
+    action: `TASK_UPDATED  ${task.title}`,
+    req,
+  });
 
   res.json(task);
 };
@@ -92,11 +92,11 @@ exports.deleteTask = async (req, res) => {
 
   await task.deleteOne();
 
-  await logActivity(
-    req.user._id,
-    "TASK_DELETED",
-    `Task deleted: ${task.title}`
-  );
+  await logActivity({
+    userId: req.user._id,
+    action: `TASK_DELETED  ${task.title}`,
+    req,
+  });
 
   res.json({
     message: "Task deleted",

@@ -60,6 +60,12 @@ exports.login = async (req, res) => {
     });
   }
 
+  if (user.status !== "active") {
+    return res.status(403).json({
+      message: "User is not active",
+    });
+  }
+
   const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
