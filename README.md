@@ -11,6 +11,13 @@ A full-stack task management application built with **Node.js, Express, MongoDB,
 * **Backend Live:**
   https://rbacify.onrender.com
 
+## Demo Credentials Admin Access
+
+* Email: `khan@gmail.com`
+* Password: `khan`
+
+> Note: These credentials are provided only for testing and demonstration purposes.
+
 
 ## Features
 
