@@ -55,7 +55,7 @@ const Login = () => {
 
       login(res.data);
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     } finally {
@@ -196,7 +196,13 @@ const Login = () => {
               Register
             </Link>
           </p>
-        </div>
+        </div><button
+            type="button"
+            onClick={() => navigate("/")}
+            className="mt-4 w-full bg-slate-700 hover:bg-slate-600 py-3 rounded-2xl font-semibold text-white transition-all"
+          >
+            Go to Home
+          </button>
       </motion.form>
     </div>
   );

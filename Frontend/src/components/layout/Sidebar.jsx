@@ -28,7 +28,7 @@ const Sidebar = () => {
       <div className="flex flex-col gap-3 flex-1">
         <Link
           className="flex items-center gap-4 bg-slate-800 text-white p-4 rounded-2xl"
-          to="/"
+          to="/dashboard"
         >
           <FiGrid size={20} />
           Dashboard

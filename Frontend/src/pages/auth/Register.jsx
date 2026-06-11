@@ -47,7 +47,7 @@ const Register = () => {
         form
       );
 
-      navigate("/login");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     } finally {
@@ -215,6 +215,14 @@ const Register = () => {
               Login
             </Link>
           </p>
+
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            className="mt-4 w-full bg-slate-700 hover:bg-slate-600 py-3 rounded-2xl font-semibold text-white transition-all"
+          >
+            Go to Home
+          </button>
         </div>
       </motion.form>
     </div>

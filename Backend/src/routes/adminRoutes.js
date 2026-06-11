@@ -6,6 +6,7 @@ const {
   updateUserStatus,
   getAllTasks,
   deleteAnyTask,
+  getActivityLogs,
 } = require("../controllers/adminController");
 
 const { protect } = require("../middleware/authMiddleware");
@@ -23,5 +24,7 @@ router.put("/users/:id/status", updateUserStatus);
 router.get("/tasks", getAllTasks);
 
 router.delete("/tasks/:id", deleteAnyTask);
+
+router.get("/logs", getActivityLogs);
 
 module.exports = router;

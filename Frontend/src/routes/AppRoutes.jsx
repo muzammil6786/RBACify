@@ -1,37 +1,49 @@
 import { Routes, Route } from "react-router-dom";
 
+import Home from "../pages/Home";
+
 import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
+
 import Dashboard from "../pages/dashboard/Dashboard";
-import AdminTasks from "../pages/admin/AdminTasks";
 import MyTasks from "../pages/dashboard/MyTasks";
+
+import AdminTasks from "../pages/admin/AdminTasks";
 import Users from "../pages/admin/Users";
 import TaskMonitoring from "../pages/admin/TaskMonitoring";
 import ActivityLogs from "../pages/admin/ActivityLogs";
+
 import ProtectedRoute from "../components/common/ProtectedRoute";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route
-  path="/register"
-  element={<Register />}
-/>
 
+      {/* Public */}
       <Route
         path="/"
+        element={<Home />}
+      />
+
+      <Route
+        path="/login"
+        element={<Login />}
+      />
+
+      <Route
+        path="/register"
+        element={<Register />}
+      />
+
+      {/* Dashboard */}
+      <Route
+        path="/dashboard"
         element={
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
         }
       />
-      
-      <Route
-  path="/admin/tasks"
-  element={<AdminTasks />}
-/>
 
       <Route
         path="/tasks"
@@ -42,6 +54,7 @@ const AppRoutes = () => {
         }
       />
 
+      {/* Admin */}
       <Route
         path="/admin/users"
         element={
@@ -53,6 +66,15 @@ const AppRoutes = () => {
 
       <Route
         path="/admin/tasks"
+        element={
+          <ProtectedRoute adminOnly>
+            <AdminTasks />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/monitoring"
         element={
           <ProtectedRoute adminOnly>
             <TaskMonitoring />
@@ -68,6 +90,7 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+
     </Routes>
   );
 };

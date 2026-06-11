@@ -44,6 +44,42 @@ const Users = () => {
     setDeleteConfirm(null);
   };
 
+  const handleToggleStatus = async (userId, currentStatus) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const updatedStatus =
+      currentStatus === "Active"
+        ? "Inactive"
+        : "Active";
+
+    await API.put(
+      `/admin/users/${userId}/status`,
+      {
+        status: updatedStatus,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setUsers((prev) =>
+      prev.map((user) =>
+        user._id === userId
+          ? {
+              ...user,
+              status: updatedStatus,
+            }
+          : user
+      )
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -88,7 +124,7 @@ const Users = () => {
             {users.map((user, index) => (
               <div
                 key={user._id}
-                className={`grid grid-cols-4 gap-4 items-center px-8 py-6 border-b border-slate-800 hover:bg-slate-800/40 transition-all ${
+                className={`grid grid-cols-5 gap-4 items-center px-8 py-6 border-b border-slate-800 hover:bg-slate-800/40 transition-all ${
                   index === users.length - 1
                     ? "border-none"
                     : ""
@@ -131,6 +167,54 @@ const Users = () => {
                   </span>
                 </div>
 
+                                <div className="flex items-center">
+
+  <button
+    onClick={() =>
+      handleToggleStatus(
+        user._id,
+        user.status
+      )
+    }
+    className={`
+      relative w-16 h-9 rounded-full transition-all
+      ${
+        user.status === "Active"
+          ? "bg-green-500"
+          : "bg-gray-600"
+      }
+    `}
+  >
+    <div
+      className={`
+        absolute top-1 left-1
+        w-7 h-7 rounded-full bg-white
+        transition-all
+        ${
+          user.status === "Active"
+            ? "translate-x-7"
+            : ""
+        }
+      `}
+    />
+
+  </button>
+
+  <span
+    className={`
+      ml-3 text-sm font-medium
+      ${
+        user.status === "Active"
+          ? "text-green-400"
+          : "text-red-400"
+      }
+    `}
+  >
+    {user.status}
+  </span>
+
+</div>
+
                 {/* Actions */}
                 <div className="flex justify-center">
                   <button
@@ -142,6 +226,7 @@ const Users = () => {
                     Delete
                   </button>
                 </div>
+
               </div>
             ))}
 
