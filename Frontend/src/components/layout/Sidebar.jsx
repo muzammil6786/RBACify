@@ -7,16 +7,28 @@ import {
 } from "react-icons/fi";
 
 import { Link, useNavigate } from "react-router-dom";
+import API from "../../api/axios";
 
 const Sidebar = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.clear();
-
-    navigate("/login");
+   const handleLogout = async () => {
+    try {
+      await API.post("/users/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error("Logout failed", error);
+    } finally {
+      localStorage.clear();
+      navigate("/login");
+    }
   };
 
   return (
