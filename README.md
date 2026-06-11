@@ -199,7 +199,6 @@ JWT_SECRET=
 
 * Working Role-Based Authentication
 * Admin Dashboard with Proper Access Control
-* Clean Responsive UI
 * Proper API Integration
 * Activity Tracking System
 
